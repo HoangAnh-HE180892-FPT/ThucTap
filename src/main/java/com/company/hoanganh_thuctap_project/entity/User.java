@@ -32,10 +32,6 @@ public class User implements JmixUserDetails, HasTimeZone {
     @JmixGeneratedValue
     private UUID id;
 
-    @Version
-    @Column(name = "VERSION", nullable = false)
-    private Integer version;
-
     @Column(name = "USERNAME", nullable = false)
     private String username;
 
@@ -67,12 +63,17 @@ public class User implements JmixUserDetails, HasTimeZone {
     @ManyToOne(fetch = FetchType.LAZY)
     private Department department;
 
+    @OrderBy("sortValue")
     @Composition
     @OneToMany(mappedBy = "user")
     private List<UserStep> steps;
 
     @Column(name = "JOINING_DATE")
     private LocalDate joiningDate;
+
+    @Version
+    @Column(name = "VERSION", nullable = false)
+    private Integer version;
 
     @Transient
     private Collection<? extends GrantedAuthority> authorities;

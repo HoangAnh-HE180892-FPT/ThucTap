@@ -43,26 +43,16 @@
             <textField id="lastNameField" property="lastName"/>
             <textField id="emailField" property="email"/>
             <comboBox id="timeZoneField" property="timeZoneId" clearButtonVisible="true"/>
+            <textField id="versionFile" property="version"/>
             <checkbox id="activeField" property="active"/>
+<!--            <textField id="completedDate" property="completedDate"/>-->
             <select id="onboardingStatusField" property="onboardingStatus"/>
-            <!--            <entityPicker id="deparmentField" property="department" dataContainer="departmentsDc">-->
-            <!--                <actions>-->
-            <!--                    <action id="entityLookupAction" type="entity_lookup"/>-->
-            <!--                    <action id="entityClearAction" type="entity_clear"/>-->
-            <!--                </actions>-->
-            <!--                <prefix/>-->
-            <!--            </entityPicker>-->
             <entityComboBox id="departmentField" property="department" itemsContainer="departmentsDc">
-                <actions>
-                    <action id="entityLookupAction" type="entity_lookup"/>
-                    <action id="entityClearAction" type="entity_clear"/>
-                </actions>
             </entityComboBox>
             <datePicker id="joiningDateField" property="joiningDate"/>
         </formLayout>
-        <hbox id="stepsButtonsPanel" classNames="buttons-panel">
+        <hbox id="ButtonsPanel" classNames="buttons-panel">
             <button id="generateButton" text="Generate"/>
-
         </hbox>
         <dataGrid id="stepsDataGrid" dataContainer="stepsDc" width="100%" height="100%">
             <actions>
@@ -79,9 +69,10 @@
                 <action id="removeAction" type="list_remove"/>
             </actions>
             <columns>
+                <column key="completed" sortable="false" width="4em" flexGrow="0"/>
+                <column property="step.name"/>
                 <column property="dueDate"/>
                 <column property="completedDate"/>
-                <column property="sortValue"/>
             </columns>
         </dataGrid>
         <hbox id="detailActions">

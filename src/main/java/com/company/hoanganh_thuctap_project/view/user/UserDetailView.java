@@ -1,16 +1,21 @@
 package com.company.hoanganh_thuctap_project.view.user;
 
 import com.company.hoanganh_thuctap_project.entity.OnboardingStatus;
+import com.company.hoanganh_thuctap_project.entity.Step;
 import com.company.hoanganh_thuctap_project.entity.User;
+import com.company.hoanganh_thuctap_project.entity.UserStep;
 import com.company.hoanganh_thuctap_project.view.main.MainView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.router.Route;
+import io.jmix.core.DataManager;
 import io.jmix.core.EntityStates;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.textfield.TypedTextField;
+import io.jmix.flowui.model.CollectionPropertyContainer;
+import io.jmix.flowui.model.DataContext;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,6 +47,15 @@ public class UserDetailView extends StandardDetailView<User> {
     private EntityStates entityStates;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private DataManager dataManager;
+
+    @ViewComponent
+    private DataContext dataContext;
+
+    @ViewComponent
+    private CollectionPropertyContainer<UserStep> stepsDc;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -86,7 +100,28 @@ public class UserDetailView extends StandardDetailView<User> {
 
     @Subscribe("generateButton")
     public void onGenerateButtonClick(final ClickEvent event) {
-        //
-    }
+        User user = getEditedEntity();
+
+        if (user.getJoiningDate() == null) {
+            notifications.create("Cannot generate steps for user without 'Joining date'")
+                    .show();
+            return;
+        }
+
+        List<Step> steps = dataManager.load(Step.class)
+                .query("select s from Step s order by s.sortValue asc")
+                .list();
+
+        for (Step step : steps) {
+            if (stepsDc.getItems().stream().noneMatch(userStep ->
+                    userStep.getStep().equals(step))) {
+                UserStep userStep = dataContext.create(UserStep.class);
+                userStep.setUser(user);
+                userStep.setStep(step);
+                userStep.setDueDate(user.getJoiningDate().plusDays(step.getDuration()));
+                userStep.setSortValue(step.getSortValue());
+                stepsDc.getMutableItems().add(userStep);
+            }
+        }    }
 
 }
