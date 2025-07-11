@@ -174,7 +174,7 @@ public class UserDetailView extends StandardDetailView<User> {
         if (completedCount == 0) {
             user.setOnboardingStatus(OnboardingStatus.NOT_STARTED);
         } else if (completedCount == user.getSteps().size()) {
-            user.setOnboardingStatus(OnboardingStatus.COPLETED);
+            user.setOnboardingStatus(OnboardingStatus.COMPLETED);
         } else {
             user.setOnboardingStatus(OnboardingStatus.NOT_STARTED);
         }

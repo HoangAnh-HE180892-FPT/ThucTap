@@ -9,7 +9,7 @@ public enum OnboardingStatus implements EnumClass<Integer> {
 
     NOT_STARTED(10),
     IN_PROGRESS(20),
-    COPLETED(30);
+    COMPLETED(30);
 
     private final Integer id;
 
