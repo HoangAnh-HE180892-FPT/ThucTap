@@ -46,7 +46,6 @@ public class UserStepEventListener {
             // nếu có lấy lại bản ghi
             user = dataManager.load(userId).one();// Datamanager
         }
-
         long completedCount = user.getSteps().stream()
                 .filter(us -> us.getCompletedDate() != null)
                 .count();

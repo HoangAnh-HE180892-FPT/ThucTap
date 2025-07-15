@@ -1,4 +1,4 @@
-package com.company.onboarding.security;
+package com.company.hoanganh_thuctap_project.security;
 
 import com.company.hoanganh_thuctap_project.entity.Department;
 import com.company.hoanganh_thuctap_project.entity.User;
@@ -9,11 +9,12 @@ import io.jmix.security.role.annotation.RowLevelRole;
 public interface HrManagerRlRole {
     String CODE = "hr-manager-rl";
 
-    @JpqlRowLevelPolicy(entityClass = Department.class, where = "{E}.hrManager.id = :current_user_id")
+    @JpqlRowLevelPolicy(entityClass = Department.class, where = "{E}.hrManager.id=:current_user_id")
     void department();
 
     @JpqlRowLevelPolicy(
             entityClass = User.class,
             where = "{E}.department.hrManager.id = :current_user_id")
     void user();
+
 }
