@@ -13,12 +13,15 @@
 
 vaadin-login-form-wrapper{
   max-width: 100%;
+  border-radius: 10px;
 }
 vaadin-login-form-wrapper::part(form){
   width: 450px;
-  height:30%;
+  height:100%;
 }
 
-vaadin
-
-
+vaadin-login-form-wrapper::part(form-title) {
+  text-align: center;
+  font-family: Arial;
+  color: #6e6e6e;
+}

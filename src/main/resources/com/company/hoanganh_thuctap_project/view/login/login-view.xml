@@ -4,6 +4,8 @@
       title="msg://LoginView.title">
     <!-- Main layout for the login form -->
     <layout justifyContent="CENTER" alignItems="CENTER" classNames="jmix-login-main-layout">
+
+
         <vbox width="100%" alignItems="CENTER">
             <image resource="images/quochuylogin.png" width="70px" height="70px"/>
             <h2 text="msg://applicationName"></h2>
