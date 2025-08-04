@@ -1,6 +1,10 @@
 package com.company.hoanganh_thuctap_project.security;
 
+import io.jmix.core.JmixSecurityFilterChainOrder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -29,7 +33,17 @@ import org.springframework.security.web.SecurityFilterChain;
  *
  * @see io.jmix.securityflowui.security.FlowuiVaadinWebSecurity
  */
+
+
 @Configuration
 public class HoangAnhThucTapProjectSecurityConfiguration {
-
+@Bean
+@Order(JmixSecurityFilterChainOrder.CUSTOM)
+  SecurityFilterChain publicFilterChain(HttpSecurity http) throws Exception {
+   http.securityMatcher("/images/**")
+                            .authorizeHttpRequests(authorize ->
+                                    authorize.anyRequest().permitAll()
+                             );
+     return http.build();
+  }
 }

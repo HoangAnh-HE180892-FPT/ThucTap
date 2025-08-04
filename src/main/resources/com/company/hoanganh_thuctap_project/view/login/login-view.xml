@@ -2,15 +2,25 @@
 <view xmlns="http://jmix.io/schema/flowui/view"
       focusComponent="login"
       title="msg://LoginView.title">
+    <!-- Main layout for the login form -->
     <layout justifyContent="CENTER" alignItems="CENTER" classNames="jmix-login-main-layout">
+        <vbox width="100%" alignItems="CENTER">
+            <image resource="images/quochuylogin.png" width="70px" height="70px"/>
+            <h2 text="msg://applicationName"></h2>
+            <span text="msg://titleLogin"></span>
+        </vbox>
+
         <loginForm id="login"
-                   forgotPasswordButtonVisible="false">
+                   forgotPasswordButtonVisible="false"
+                   classNames="form-login">
+            <!-- Login form fields -->
             <form title="msg://loginForm.headerTitle"
                   username="msg://loginForm.username"
                   password="msg://loginForm.password"
                   rememberMe="msg://loginForm.rememberMe"
                   submit="msg://loginForm.submit"
                   forgotPassword="msg://loginForm.forgotPassword"/>
+            <!-- Error messages -->
             <errorMessage title="msg://loginForm.errorTitle"
                           message="msg://loginForm.badCredentials"
                           username="msg://loginForm.errorUsername"

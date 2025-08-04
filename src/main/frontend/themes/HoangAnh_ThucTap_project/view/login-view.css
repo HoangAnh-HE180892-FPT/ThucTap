@@ -1,5 +1,24 @@
 /* Predefined styles for the LoginView */
 
 .jmix-login-main-layout {
-  background-color: var(--lumo-shade-5pct);
+  background-image: url(images/backgroundlogin.png);
+  /*background-color: var(--lumo-shade-5pct);*/
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column; /* Đảm bảo các phần tử trong form xếp theo chiều dọc */
+    justify-content: center; /* Căn giữa các phần tử */
 }
+
+vaadin-login-form-wrapper{
+  max-width: 100%;
+}
+vaadin-login-form-wrapper::part(form){
+  width: 450px;
+  height:30%;
+}
+
+vaadin
+
+
